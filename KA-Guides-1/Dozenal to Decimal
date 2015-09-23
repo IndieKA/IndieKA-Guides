@@ -1,0 +1,17 @@
+/*************************
+ * Dozenal To Decimal / Decimal to Dozenal Questions! 
+ * Created by InceptionTime
+ * The answer key is NOT in this program. I have the answers, but I'm only revealing them to those who got it correct on a private program. 
+*************************/
+draw = function() {
+    background(255, 255, 9);
+    textAlign(CENTER, CENTER);
+    textSize(41);
+    fill(0, 255, 255);
+    text("Dozenal to Decimal\nQuestions!", 201, 70);
+    textSize(20);
+    text("By InceptionTime", 201, 135);
+    textAlign(LEFT, TOP);
+    text("1. 33 to decimal\n2. 34 to dozenal\n3. 95 to decimal\n4. 42 to dozenal\n5. 213 to decimal\n6. 908 to decimal\n7. 403 to dozenal\n8. 323 to dozenal\n9. 999 to decimal", 30, 152);
+    text("10. 407 to decimal", 206, 152);
+};
