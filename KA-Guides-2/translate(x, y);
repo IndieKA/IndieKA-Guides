@@ -1,0 +1,47 @@
+/******************************
+ * translate(x, y);
+ * 
+ * This function displaces the drawn shapes by a given amount in the x/y directions. If called multiple times, the offsets will be added to each other (accumulative effect). To stop translating shapes, use pushMatrix()/popMatrix().
+ * 
+ * Parameters:
+ * x - The amount to translate left/right.
+ * y - The amount to translate up/down.
+******************************/
+// Example
+var x = 200, 
+    y = 200;
+var keys = [];
+var keyPressed = function(){
+    keys[keyCode] = true;
+};
+var keyReleased = function(){
+    keys[keyCode] = false;
+};
+draw = function() {
+    background(161, 161, 161);
+    pushMatrix();
+    translate(x, y);
+    strokeWeight(3);
+    fill(255, 255, 255);
+    ellipse(0, 0, 100, 100);
+    popMatrix();
+    textAlign(CENTER, CENTER);
+    textSize(30);
+    textFont(createFont("Chalkboard Bold"));
+    text("The ellipse is translated\nat ("+x+", "+y+")",201,54);
+    fill(0);
+    textSize(20);
+    text("** Use arrow keys to move",201,108);
+    if(keys[DOWN]){
+        y+=3;
+    }
+    if(keys[UP]){
+        y-=3;
+    }
+    if(keys[RIGHT]){
+        x+=3;
+    }
+    if(keys[LEFT]){
+        x-=3;
+    }
+};
