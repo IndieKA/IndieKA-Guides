@@ -1,0 +1,18 @@
+var angle = -200;
+draw = function() {
+    background(237, 237, 237);
+    textFont(createFont("Chalkboard Bold"));
+    textAlign(CENTER, CENTER);
+    textSize(30);
+    fill(255, 255, 255);
+    text("Using sin in a program",201,30);
+    pushMatrix();
+    fill(255, 0, 0);
+    strokeWeight(3);
+    translate(200,200);
+    rectMode(CENTER);
+    rotate(frameCount/3 * sin(angle));
+    rect(0,0,100,100);
+    popMatrix();
+    angle+=2;
+};
