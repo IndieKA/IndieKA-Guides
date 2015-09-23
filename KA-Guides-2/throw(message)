@@ -1,0 +1,22 @@
+/**
+ * throw(Message)
+ * 
+ * This function throws a message by Oh Noes to the viewer
+ * 
+ * Parameters:
+ * NONE
+ * 
+ * NOTE: In some cases Oh Noes will say "Uncaught" before the message. To prevent this, I used gfx.external graphics as that somewhat glitches the throw function and makes it work, as shown here: >
+ */
+draw = function() {
+    background(194, 194, 194);
+    textSize(50);
+    textFont(createFont("cursive"));
+    textAlign(CENTER,CENTER);
+    text("Guys, the throw \nfunction now \nworks!",201,201);
+    textSize(30);
+    throw {
+        message:"Oh noes what? I'm tired of always helping you with your errors and everything else. I quit. Winston can take my job. I'm going to retire in my house of errors.",
+        lineno:1700
+    };
+};
