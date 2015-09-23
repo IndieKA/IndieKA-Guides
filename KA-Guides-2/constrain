@@ -1,0 +1,26 @@
+/******************************
+ * constrain(value, min, max);
+ * 
+ * This function constrains a value to not exceed a maximum and minimum value.
+ * 
+ * Parameters:
+ * value - The value to constrain
+ * min - The minimum limit
+ * max	- The maximum limit
+******************************/
+
+// Example
+draw = function() {
+    background(212, 212, 212);
+    var exCons = constrain(mouseX, 30, 70);
+    fill(255, 255, 255);
+    noStroke();
+    rect(exCons-10, 40, 30, 30);
+    fill(255, 0, 0);
+    textFont(createFont("Chalkboard Bold"));
+    textSize(20);
+    text("Try moving it!", 10, 105);
+    fill(0, 0, 0);
+    rect(91, 40, 1, 30);
+    text("Try moving it here, to the line.",98, 65);
+};
