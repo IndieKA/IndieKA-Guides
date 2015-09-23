@@ -1,0 +1,82 @@
+// I love science, and when it comes to the universe, I'm a maniac,
+// so that's why I decided to create a Solar System on Khan Academy!
+
+var starBackground = function() {
+    this.x = random(1, 800);
+    this.y = random(1, 400);
+    this.size = random(0.1, 3.2);
+    this.speed = this.size;
+    this.drawStar = function() {
+        ellipse(this.x, this.y, this.size, this.size);
+    };
+    this.starMover = function() {
+        this.x = this.x - this.speed;
+        if(this.x < 0) {
+            this.x = random(400, 800);
+        }
+    };
+};
+var stars = [];
+for(var i = 0; i < 1000; i++) {
+    stars.push(new starBackground());
+}
+var planetX = 200;
+var planetY = 200;
+var a = 0;
+var speed = 0.5;
+var planetXScale = 50;
+var planetYScale = 36;
+var ang;
+var solarSystem = function(){
+    strokeWeight(5);
+    stroke(240, 151, 110);
+    ang = 0.6;
+    point(planetX + ang * planetXScale * cos(a * 30 * speed), planetY + ang * planetYScale * sin(a * 30 * speed));
+    strokeWeight(9);
+    stroke(250, 189, 8);
+    ang = 0.8;
+    point(planetX + ang * planetXScale * cos(a * 21 * speed), planetY + ang * planetYScale * sin(a * 21 * speed));
+    strokeWeight(10);
+    stroke(50, 0, 255);
+    ang = 1;
+    point(planetX + ang * planetXScale * cos(a * 18 * speed), planetY + ang * planetYScale * sin(a * 18 * speed));
+    strokeWeight(6);
+    stroke(255, 0, 0);
+    ang = 1.2;
+    point(planetX + ang * planetXScale * cos(a * 15 * speed), planetY + ang * planetYScale * sin(a * 15 * speed));
+    strokeWeight(24);
+    stroke(196, 127, 106);
+    ang = 1.6;
+    point(planetX + ang * planetXScale * cos(a * 9 * speed), planetY + ang * planetYScale * sin(a * 9 * speed));
+    strokeWeight(22);
+    stroke(250, 221, 135);
+    ang = 2.2;
+    point(planetX + ang * planetXScale * cos(a * 6 * speed), planetY + ang * planetYScale * sin(a * 6 * speed));
+    strokeWeight(17);
+    stroke(135, 214, 250);
+    ang = 2.8;
+    point(planetX + ang * planetXScale * cos(a * 4 * speed), planetY + ang * planetYScale * sin(a * 4 * speed));
+    strokeWeight(17);
+    stroke(114, 129, 224);
+    ang = 3.4;
+    point(planetX + ang * planetXScale * cos(a * 3 * speed), planetY + ang * planetYScale * sin(a * 3 * speed));
+    a -= speed;
+    noStroke();
+    fill(255, 255, 0);
+    ellipse(199,201,30,30);
+};
+var draw = function() {
+    textFont(createFont("Segoe UI Light"));
+    background(0);
+    for(var j = 0; j < stars.length; j++) {
+        noStroke();
+        fill(255, 255, 255);
+        stars[j].starMover();
+        stars[j].drawStar();
+    }
+    solarSystem();
+    textAlign(CENTER,CENTER);
+    textSize(50);
+    fill(255, 255, 255);
+    text("Solar System",201,30);
+};
