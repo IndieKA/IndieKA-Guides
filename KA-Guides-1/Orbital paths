@@ -1,0 +1,20 @@
+var ang1 = 0;
+var ang2 = 0;
+var rad1 = 140;
+var rad2 = 20;
+var draw = function() {
+    background(0, 0, 0);
+    ang1 = ang1+1;
+    ang2 = ang2+3;
+    noStroke();
+    fill(255, 255, 0);
+    ellipse(200,200,100,100);
+    fill(0, 255, 255);
+    ellipse(200+cos(ang1)*rad1,200+sin(ang1)*rad1,20,20);
+    fill(153, 153, 153);
+    ellipse(200+cos(ang1)*rad1+cos(ang2)*rad2,200+sin(ang1)*rad1+sin(ang2)*rad2,10,10);
+    noFill();
+    stroke(255, 0, 0);
+    strokeWeight(3);
+    ellipse(200,200,280,280);
+};
