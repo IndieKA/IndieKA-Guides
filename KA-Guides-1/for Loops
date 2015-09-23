@@ -1,0 +1,20 @@
+/******************************
+ * for(var i);
+ * 
+ * This function repeats code a fixed number of times. See the MDN JavaScript reference for a longer explanation here: 
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for
+ * 
+******************************/
+// Example
+
+textFont(createFont("Chalkboard Bold"));
+textAlign(CENTER, CENTER);
+fill(0);
+textSize(30);
+text("for(); loops",201,30);
+for(var i = 0; i < 13; i+=1){
+    var x = i * 30;
+    strokeWeight(3);
+    fill(0, 255, 0);
+    ellipse(x + 20, 200, 20, 20);
+}
