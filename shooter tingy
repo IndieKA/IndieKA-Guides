@@ -1,0 +1,156 @@
+// This was not copied from Indie. I made the original. DillingerLee helped with the collision, I made the detection.
+
+/* --- 2D Style --- */
+var keys = [];
+keyPressed = function() {
+    keys[keyCode] = true;
+};
+keyReleased = function() {
+    delete keys[keyCode];
+};
+
+var Block = function(x, y, w, h) {
+    this.x = x;
+    this.y = y;
+    this.width = w;
+    this.height = h;
+
+    this.draw = function() {
+        fill(130);
+        rect(this.x, this.y, this.width, this.height);
+    };
+};
+
+// Define collideWith Function
+var collideWith = function(object1, object2) {
+    return (object1.x + object1.width > object2.x &&
+        object1.x + 1 < object2.x + object2.width &&
+        object1.y + object1.height > object2.y &&
+        object1.y < object2.y + object2.height);
+};
+
+var blocks = [new Block(200, 175, 40, 40), new Block(300, 200, 40, 40)];
+
+var Bullet = function(x, y, velx, vely) {
+    this.x = x;
+    this.y = y;
+    this.velx = velx;
+    this.vely = vely;
+    this.timeToLive = 200;
+    
+    this.draw = function() {
+        fill(0);
+        ellipse(this.x, this.y, 5, 5);
+    };
+    
+    this.update = function() {
+        this.x+=this.velx;
+        this.y+=this.vely;
+        this.timeToLive--;
+    };
+    
+    this.isDead = function() {
+        return this.timeToLive < 0;
+    };
+    
+};
+
+var bullets = [];
+
+// Define Player
+var Player = function(x, y, w, h) {
+    this.x = x;
+    this.y = y;
+    this.width = w;
+    this.height = h;
+    this.speed = 2.5;
+
+    this.update = function() {
+        if (keys[RIGHT]) {
+            this.x += this.speed;
+        }
+        if (keys[LEFT]) {
+            this.x -= this.speed;
+        }
+
+        for (var each in blocks) {
+            if (collideWith(this, blocks[each])) {
+                if (keys[RIGHT]) {
+                    this.x -= this.speed;
+                }
+                if (keys[LEFT]) {
+                    this.x += this.speed;
+                }
+                break; // Collision was found. No need to continue checking
+            }
+        }
+
+        if (keys[UP]) {
+            this.y -= this.speed;
+        }
+        if (keys[DOWN]) {
+            this.y += this.speed;
+        }
+
+        for (var each in blocks) {
+            if (collideWith(this, blocks[each])) {
+                if (keys[UP]) {
+                    this.y += this.speed;
+                }
+                if (keys[DOWN]) {
+                    this.y -= this.speed;
+                }
+                break;
+            }
+        }
+    };
+
+    this.draw = function() {
+        ellipseMode(CORNER);
+        fill(255, 0, 0);
+        ellipse(this.x, this.y, this.width, this.height);
+        ellipseMode(CENTER);
+        
+        var r = atan2(mouseX-this.x+this.width/2, this.y-mouseY+this.height/2)-90;
+        
+        pushMatrix();
+        translate(this.x+this.width/2, this.y+this.height/2);
+        rotate(r);
+        
+        rect(0, 0, 46, 2);
+        
+        rotate(22);
+        rect(1, -15, 33, 5);
+        
+        popMatrix();
+        
+        if (mouseIsPressed && frameCount%10 === 0) {
+            bullets.push(new Bullet(this.x+this.width/2, this.y+this.height/2, cos(r)*5, sin(r)*5));
+        }
+        
+    };
+};
+
+// Create a new Instance of the Player Object
+var player = new Player(267, 140, 40, 40);
+noStroke();
+
+draw = function() {
+    background(255, 255, 255);
+    
+    for (var each in bullets) {
+        bullets[each].draw();
+        bullets[each].update();
+        if (bullets[each].isDead()) {
+            bullets.splice(each, 1);
+        }
+    }
+    
+    player.update();
+    player.draw();
+
+    for (var each in blocks) {
+        blocks[each].draw();
+    }
+    
+};
